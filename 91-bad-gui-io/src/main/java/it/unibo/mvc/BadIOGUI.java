@@ -74,8 +74,16 @@ public class BadIOGUI {
         canvas.add(panel);
         read.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Hello world!");
+            public void actionPerformed(final ActionEvent e) {
+                List<String> readData = List.of();
+                try {
+                    readData = Files.readAllLines(new File(PATH).toPath());
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(frame, ex, "I/O Error", JOptionPane.ERROR_MESSAGE);
+                }
+                for (final String line: readData) {
+                    System.out.println(line);   // NOPMD suppressed as syso is necessary for the exercise
+                }
             }
         });
     }
@@ -93,6 +101,7 @@ public class BadIOGUI {
         final int sw = (int) screen.getWidth();
         final int sh = (int) screen.getHeight();
         frame.setSize(sw / PROPORTION, sh / PROPORTION);
+        frame.pack();
         /*
          * Instead of appearing at (0,0), upper left corner of the screen, this
          * flag makes the OS window manager take care of the default positioning
