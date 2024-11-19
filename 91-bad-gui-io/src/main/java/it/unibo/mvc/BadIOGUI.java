@@ -68,8 +68,16 @@ public class BadIOGUI {
         });
         final JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        final JButton read = new JButton("Read");
         panel.add(write);
+        panel.add(read);
         canvas.add(panel);
+        read.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Hello world!");
+            }
+        });
     }
 
     private void display() {
