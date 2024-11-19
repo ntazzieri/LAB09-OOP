@@ -66,6 +66,10 @@ public class BadIOGUI {
                 }
             }
         });
+        final JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        panel.add(write);
+        canvas.add(panel);
     }
 
     private void display() {
