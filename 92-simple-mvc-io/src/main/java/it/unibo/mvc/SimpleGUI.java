@@ -19,10 +19,13 @@ import javax.swing.JTextArea;
  */
 public final class SimpleGUI {
 
-    private static final int PROPORTION = 4;
+    private static final int PROPORTION = 5;
     private final JFrame frame = new JFrame();
-    private final Controller c = new Controller();
+    private final Controller controller = new Controller();
 
+    /**
+     * Builds SimpleGUI interface.
+     */
     public SimpleGUI() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("My first java graphical interface");
@@ -37,7 +40,7 @@ public final class SimpleGUI {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 try {
-                    c.writeOnCurrentFile(textArea.getText());
+                    controller.writeOnCurrentFile(textArea.getText());
                 } catch (final IOException e1) {
                     JOptionPane.showMessageDialog(panel, e1, "IO ERROR", JOptionPane.ERROR_MESSAGE);
                 }
@@ -45,6 +48,9 @@ public final class SimpleGUI {
         });
     }
 
+    /**
+     * Displays SimpleGUI.
+     */
     public void display() {
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final int sw = (int) screen.getWidth();
@@ -54,7 +60,11 @@ public final class SimpleGUI {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
+    /**
+     * Main.
+     * @param args
+     */
+    public static void main(final String[] args) {
         new SimpleGUI().display();
     }
 

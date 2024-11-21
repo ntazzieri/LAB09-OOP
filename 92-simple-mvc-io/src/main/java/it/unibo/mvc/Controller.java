@@ -1,9 +1,10 @@
 package it.unibo.mvc;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 /**
  * Application controller. Performs the I/O.
@@ -17,42 +18,41 @@ public class Controller {
     private File currentFile = new File(DEFAULT_PATH);
 
     /**
-     * Returns a copy of the current file
-     * @return a copy of the current file 
+     * Returns a copy of the current file.
+     * @return a copy of the current file.
      */
     public File getCurrentFile() {
-        return new File(currentFile.getPath());
+        return currentFile;
     }
 
     /**
-     * Sets the current file
-     * @param file to set as current
+     * Sets the current file, if it doesn't exist, no change will be made.
+     * @param file to set as current.
      */
     public void setCurrentFile(final File file) {
-        if (file != null) {
-            this.currentFile = new File(file.getPath());
+        final File toSet = Objects.requireNonNull(file);
+        if (toSet.exists()) {
+            this.currentFile = toSet;
         }
     }
 
     /**
-     * returns the current file path
-     * @return a string representing the current file path
+     * returns the current file path.
+     * @return a string representing the current file path.
      */
     public String getCurrentFilePath() {
         return currentFile.getPath();
     }
 
     /**
-     * Writes on the current file
-     * @param text to write
+     * Writes on the current file.
+     * @param text to write.
      * @throws IOException
      */
     public void writeOnCurrentFile(final String text) throws IOException {
-        try (PrintStream ps = new PrintStream(currentFile)) {
+        try (PrintStream ps = new PrintStream(currentFile, StandardCharsets.UTF_8)) {
             ps.println(text);
-        } catch (final FileNotFoundException ex) {
-            throw new IOException(currentFile.getPath() + " has not been found");
-        }
+        } 
     }
 
 }
